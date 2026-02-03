@@ -55,23 +55,41 @@ const bookingForm = document.getElementById('bookingForm');
 
 bookingForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    
-    const formData = {
-        pickup: document.getElementById('pickup').value,
-        dropoff: document.getElementById('dropoff').value,
-        date: document.getElementById('date').value,
-        time: document.getElementById('time').value,
-        vehicle: document.getElementById('vehicle').value
-    };
-    
+
+    const pickup = document.getElementById('pickup').value;
+    const dropoff = document.getElementById('dropoff').value;
+    const date = document.getElementById('date').value;
+    const time = document.getElementById('time').value;
+    const vehicle = document.getElementById('vehicle').value;
+
+    // Format the WhatsApp message
+    const message = `🚗 *New Booking Request - Dev Travels*\n\n` +
+        `📍 *Pickup Location:* ${pickup}\n` +
+        `🎯 *Drop-off Location:* ${dropoff}\n` +
+        `📅 *Date:* ${date}\n` +
+        `🕐 *Time:* ${time}\n` +
+        `🚙 *Vehicle Type:* ${vehicle}\n\n` +
+        `Thank you for choosing Dev Travels!`;
+
+    // Encode the message for URL
+    const encodedMessage = encodeURIComponent(message);
+
+    // WhatsApp number (remove + and spaces)
+    const whatsappNumber = '919601746991';
+
+    // Create WhatsApp URL
+    const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+
+    // Open WhatsApp
+    window.open(whatsappURL, '_blank');
+
     // Show success message
-    showNotification('Booking request submitted successfully! We will contact you shortly.', 'success');
-    
-    // Reset form
-    bookingForm.reset();
-    
-    // Log form data (in production, this would be sent to a server)
-    console.log('Booking Details:', formData);
+    showNotification('Opening WhatsApp to send your booking request...', 'success');
+
+    // Reset form after a short delay
+    setTimeout(() => {
+        bookingForm.reset();
+    }, 1000);
 });
 
 // ==================== Contact Form ====================
@@ -79,22 +97,39 @@ const contactForm = document.getElementById('contactForm');
 
 contactForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    
-    const formData = {
-        name: document.getElementById('name').value,
-        email: document.getElementById('email').value,
-        phone: document.getElementById('phone').value,
-        message: document.getElementById('message').value
-    };
-    
+
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const phone = document.getElementById('phone').value;
+    const message = document.getElementById('message').value;
+
+    // Format the WhatsApp message
+    const whatsappMessage = `📧 *New Contact Inquiry - Dev Travels*\n\n` +
+        `👤 *Name:* ${name}\n` +
+        `📧 *Email:* ${email}\n` +
+        `📱 *Phone:* ${phone}\n\n` +
+        `💬 *Message:*\n${message}\n\n` +
+        `---\nSent from Dev Travels Website`;
+
+    // Encode the message for URL
+    const encodedMessage = encodeURIComponent(whatsappMessage);
+
+    // WhatsApp number
+    const whatsappNumber = '919601746991';
+
+    // Create WhatsApp URL
+    const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+
+    // Open WhatsApp
+    window.open(whatsappURL, '_blank');
+
     // Show success message
-    showNotification('Message sent successfully! We will get back to you soon.', 'success');
-    
-    // Reset form
-    contactForm.reset();
-    
-    // Log form data (in production, this would be sent to a server)
-    console.log('Contact Form Data:', formData);
+    showNotification('Opening WhatsApp to send your message...', 'success');
+
+    // Reset form after a short delay
+    setTimeout(() => {
+        contactForm.reset();
+    }, 1000);
 });
 
 // ==================== Notification System ====================
@@ -104,7 +139,7 @@ function showNotification(message, type = 'success') {
     if (existingNotification) {
         existingNotification.remove();
     }
-    
+
     // Create notification element
     const notification = document.createElement('div');
     notification.className = `notification notification-${type}`;
@@ -115,7 +150,7 @@ function showNotification(message, type = 'success') {
         </div>
         <button class="notification-close" onclick="this.parentElement.remove()">×</button>
     `;
-    
+
     // Add styles
     notification.style.cssText = `
         position: fixed;
@@ -135,9 +170,9 @@ function showNotification(message, type = 'success') {
         max-width: 500px;
         animation: slideInRight 0.3s ease-out;
     `;
-    
+
     document.body.appendChild(notification);
-    
+
     // Auto remove after 5 seconds
     setTimeout(() => {
         notification.style.animation = 'slideOutRight 0.3s ease-out';
@@ -241,7 +276,7 @@ const observer = new IntersectionObserver((entries) => {
 // Observe elements for animation
 document.addEventListener('DOMContentLoaded', () => {
     const animatedElements = document.querySelectorAll('.service-card, .fleet-card, .feature-item, .visual-card');
-    
+
     animatedElements.forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(30px)';
