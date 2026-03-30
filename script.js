@@ -63,13 +63,13 @@ bookingForm.addEventListener('submit', (e) => {
     const vehicle = document.getElementById('vehicle').value;
 
     // Format the WhatsApp message
-    const message = `🚗 *New Booking Request - Dev Travels*\n\n` +
-        `📍 *Pickup Location:* ${pickup}\n` +
-        `🎯 *Drop-off Location:* ${dropoff}\n` +
-        `📅 *Date:* ${date}\n` +
-        `🕐 *Time:* ${time}\n` +
-        `🚙 *Vehicle Type:* ${vehicle}\n\n` +
-        `Thank you for choosing Dev Travels!`;
+    const message = `hi,\n` +
+        `I would like to Book a Ride:\n` +
+        `Pickup Location: ${pickup}\n` +
+        `Drop-off Location: ${dropoff}\n` +
+        `Date: ${date}\n` +
+        `Time: ${time}\n` +
+        `Vehicle Type: ${vehicle}`;
 
     // Encode the message for URL
     const encodedMessage = encodeURIComponent(message);
@@ -99,17 +99,13 @@ contactForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
     const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
     const phone = document.getElementById('phone').value;
     const message = document.getElementById('message').value;
 
     // Format the WhatsApp message
-    const whatsappMessage = `📧 *New Contact Inquiry - Dev Travels*\n\n` +
-        `👤 *Name:* ${name}\n` +
-        `📧 *Email:* ${email}\n` +
-        `📱 *Phone:* ${phone}\n\n` +
-        `💬 *Message:*\n${message}\n\n` +
-        `---\nSent from Dev Travels Website`;
+    const whatsappMessage = `hi ${name},\n` +
+        `Number: ${phone}\n` +
+        `${message}`;
 
     // Encode the message for URL
     const encodedMessage = encodeURIComponent(whatsappMessage);
