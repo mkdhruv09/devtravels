@@ -78,7 +78,7 @@ bookingForm.addEventListener('submit', (e) => {
     const whatsappNumber = '919601746991';
 
     // Create WhatsApp URL
-    const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+    const whatsappURL = `https://api.whatsapp.com/send/?phone=${whatsappNumber}&text=${encodedMessage}&type=phone_number&app_absent=0`;
 
     // Open WhatsApp
     window.open(whatsappURL, '_blank');
@@ -114,7 +114,7 @@ contactForm.addEventListener('submit', (e) => {
     const whatsappNumber = '919601746991';
 
     // Create WhatsApp URL
-    const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+    const whatsappURL = `https://api.whatsapp.com/send/?phone=${whatsappNumber}&text=${encodedMessage}&type=phone_number&app_absent=0`;
 
     // Open WhatsApp
     window.open(whatsappURL, '_blank');
